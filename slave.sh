@@ -10,7 +10,7 @@ tar -zxf ~/hadoop.master.tar.gz -C /usr/local
 source ./prework.sh
 
 mkdir /home/hadoop/.ssh
-cat /home/root/id_rsa.pub >> /home/hadoop/.ssh/authorized_keys
+cat /root/id_rsa.pub >> /home/hadoop/.ssh/authorized_keys
 chown -R hadoop /usr/local/hadoop
 chown -R hadoop /home/hadoop/.ssh
 

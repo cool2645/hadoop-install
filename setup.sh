@@ -73,9 +73,9 @@ cp ./tmp/hdfs-site.xml /usr/local/hadoop/etc/hadoop/
 cp ./tmp/slaves /usr/local/hadoop/etc/hadoop/
 
 # tar
-cd $DIR
-chown -R hadoop /usr/local/hadoop
-tar -zcf ./tmp/hadoop.master.tar.gz /usr/local/hadoop
+cd /usr/local
+chown -R hadoop ./hadoop
+tar -zcf $DIR/tmp/hadoop.master.tar.gz ./hadoop
 
 # Setup slaves traversily
 cd $DIR
