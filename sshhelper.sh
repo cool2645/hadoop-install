@@ -37,7 +37,7 @@ expect {
 expect "100%"
 
 # Send slave.sh
-spawn scp ./tmp/slave.sh root@$slave_ip:/root
+spawn scp ./slave.sh root@$slave_ip:/root
 expect {
 "yes/no" { send "yes\r";exp_continue }
 "password:" { send "$slave_password\r" }

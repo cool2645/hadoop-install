@@ -9,6 +9,9 @@ while [ -h "$SOURCE"  ]; do
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
+# Set chmod
+chmod +x sshhelper.sh hadoopctl.sh
+
 # Load main conf
 cd $DIR
 source ./setup.conf
@@ -43,9 +46,11 @@ then
 	slave_count=$[ slave_count + 1 ]
 fi
 echo ${hadoop_password} | sudo -S sh -c "cat ./tmp/master.host >> /etc/hosts"
+echo ${hadoop_password} | sudo -S sh -c "echo '0.0.0.0 Master' >> /etc/hosts"
 
 source ./setup.conf
 echo "$master_ip $master_name" > ./tmp/slave.host
+echo "$master_ip Master" >> ./tmp/slave.host
 if [[ $master_serve_as_slave == 1 ]]
 then
 	echo "$master_name" >> ./tmp/slaves
@@ -65,9 +70,9 @@ echo ${hadoop_password} | sudo -S chown -R hadoop ./hadoop
 cd $DIR
 cp ./lib/hdfs-site.xml ./tmp/
 sed -i "s/{{SLAVE_NUM}}/$slave_count/g" `grep {{SLAVE_NUM}} -l ./tmp/hdfs-site.xml`
-cp ./tmp/* /usr/local/hadoop/etc/hadoop/
-cp ./tmp/hdfs-site.xml /usr/local/hadoop/etc/hadoop/
-cp ./tmp/slaves /usr/local/hadoop/etc/hadoop/
+echo ${hadoop_password} | sudo -S cp ./lib/* /usr/local/hadoop/etc/hadoop/
+echo ${hadoop_password} | sudo -S cp ./tmp/hdfs-site.xml /usr/local/hadoop/etc/hadoop/
+echo ${hadoop_password} | sudo -S cp ./tmp/slaves /usr/local/hadoop/etc/hadoop/
 
 # tar
 cd $DIR

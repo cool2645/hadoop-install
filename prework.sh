@@ -15,9 +15,7 @@ mkdir tmp
 chown -R hadoop ./tmp
 
 # Switch to hadoop
-su - hadoop << EOF
-cd ~
-EOF
+su - hadoop
 
 # Install openjdk and expect
 echo ${hadoop_password} | sudo -S apt-get update -y
