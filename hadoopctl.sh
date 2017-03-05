@@ -14,7 +14,7 @@ usage()
 }
 install()
 {
-	sh ./setup.sh
+	source ./setup.sh
 }
 init()
 {
