@@ -25,7 +25,7 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ./id_rsa.pub >> ./authorized_keys
 cp ./id_rsa.pub ${DIR}/tmp
 
-# Generate host file
+# Generate host file and slaves
 cd $DIR
 slave_count=0
 for file in ./conf/*.conf
@@ -34,13 +34,23 @@ do
     then
         source $file
 		echo "$slave_ip $slave_name" >> ./tmp/master.host
+		echo "$slave_name" >> ./tmp/slaves
 		slave_count=$[ slave_count + 1 ]
     fi
 done
+if [[ $master_serve_as_slave == 1 ]]
+then
+	slave_count=$[ slave_count + 1 ]
+fi
 echo ${hadoop_password} | sudo -S sh -c "cat ./tmp/master.host >> /etc/hosts"
 
 source ./setup.conf
 echo "$master_ip $master_name" > ./tmp/slave.host
+if [[ $master_serve_as_slave == 1 ]]
+then
+	echo "$master_name" >> ./tmp/slaves
+fi
+
 
 # Install hadoop
 cd ~
@@ -57,7 +67,19 @@ cp ./lib/hdfs-site.xml ./tmp/
 sed -i "s/{{SLAVE_NUM}}/$slave_count/g" `grep {{SLAVE_NUM}} -l ./tmp/hdfs-site.xml`
 cp ./tmp/* /usr/local/hadoop/etc/hadoop/
 cp ./tmp/hdfs-site.xml /usr/local/hadoop/etc/hadoop/
+cp ./tmp/slaves /usr/local/hadoop/etc/hadoop/
 
 # tar
 cd $DIR
 tar -zcf ./tmp/hadoop.master.tar.gz /usr/local/hadoop
+
+# Setup slaves traversily
+cd $DIR
+for file in ./conf/*.conf
+do
+    if test -f $file
+    then
+        source $file
+		./sshhelper.sh $slave_ip $root_password
+    fi
+done

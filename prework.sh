@@ -19,14 +19,17 @@ su - hadoop << EOF
 cd ~
 EOF
 
-# Install openjdk
+# Install openjdk and expect
 echo ${hadoop_password} | sudo -S apt-get update -y
 echo ${hadoop_password} | sudo -S apt-get dist-upgrade -y 
 echo ${hadoop_password} | sudo -S apt-get upgrade -y
-echo ${hadoop_password} | sudo -S apt-get install openjdk-7-jre openjdk-7-jdk
+echo ${hadoop_password} | sudo -S apt-get install openjdk-7-jre openjdk-7-jdk expect -y
 str=$(dpkg -L openjdk-7-jdk | grep '/bin/javac')
 JH=${str%%/bin/javac}
-echo 'export JAVA_HOME='$JH >> ~/.bashrc
+FILETMP=$(cat ~/.bashrc)
+echo 'export JAVA_HOME='${JH} > ~/.bashrc
+echo 'export PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin' >> ~/.bashrc
+echo "$FILETMP" >> ~/.bashrc
 source ~/.bashrc
 
 
