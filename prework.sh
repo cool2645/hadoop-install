@@ -10,6 +10,7 @@ EOF
 adduser hadoop sudo
 
 # Make tmp dir
+rm -rf tmp
 mkdir tmp
 chown -R hadoop ./tmp
 
