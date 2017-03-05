@@ -1,0 +1,5 @@
+#!/bin/bash
+master_name=VM-26-45			# Hostname of Master
+master_ip=123.206.12.34			# IP address of Master
+hadoop_password=fakepwd			# Password of user "hadoop"
+master_serve_as_slave=1			# Install datanode on master or not

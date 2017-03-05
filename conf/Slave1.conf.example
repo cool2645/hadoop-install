@@ -1,0 +1,4 @@
+#!/bin/bash
+slave_name=VM-26-46				# Hostname of Master
+slave_ip=123.206.26.45			# IP address of Master
+root_password=fakepwd			# Password of user "hadoop"
