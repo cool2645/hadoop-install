@@ -37,6 +37,8 @@ do
 		slave_count=$[ slave_count + 1 ]
     fi
 done
+echo ${hadoop_password} | sudo -S sh -c "cat ./tmp/master.host >> /etc/hosts"
+
 source ./setup.conf
 echo "$master_ip $master_name" > ./tmp/slave.host
 
