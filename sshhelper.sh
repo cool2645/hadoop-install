@@ -29,7 +29,7 @@ expect {
 expect "100%"
 
 # Send prework.sh
-spawn scp ./tmp/prework.sh root@$slave_ip:/root
+spawn scp ./prework.sh root@$slave_ip:/root
 expect {
 "yes/no" { send "yes\r";exp_continue }
 "password:" { send "$slave_password\r" }

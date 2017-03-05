@@ -58,7 +58,7 @@ fi
 # Install hadoop
 cd ~
 wget http://mirror.bit.edu.cn/apache/hadoop/common/stable/hadoop-2.7.3.tar.gz
-mv hadoop*.tar.gz hadoop.tar.gz
+mv hadoop-2.7.3.tar.gz hadoop.tar.gz
 tar -zxf ~/hadoop.tar.gz -C /usr/local
 cd /usr/local
 mv ./hadoop-*/ ./hadoop

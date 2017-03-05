@@ -3,7 +3,7 @@
 source ./setup.conf
 
 # As root
-cat ./tmp/master.host >> /etc/hosts
+cat ./slave.host >> /etc/hosts
 rm -r /usr/local/hadoop
 tar -zxf ~/hadoop.master.tar.gz -C /usr/local
 
