@@ -59,3 +59,14 @@ cp ./tmp/hdfs-site.xml /usr/local/hadoop/etc/hadoop/
 # tar
 cd $DIR
 tar -zcf ./tmp/hadoop.master.tar.gz /usr/local/hadoop
+
+# Setup slaves traversily
+cd $DIR
+for file in ./conf/*.conf
+do
+    if test -f $file
+    then
+        source $file
+		./sshhelper.sh $slave_ip $root_password
+    fi
+done
