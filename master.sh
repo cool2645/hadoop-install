@@ -1,6 +1,17 @@
 #!/bin/bash
 #
+# Get current working path
+SOURCE="$0"
+while [ -h "$SOURCE"  ]; do
+	    DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
+		SOURCE="$(readlink "$SOURCE")"
+		[[ $SOURCE != /*  ]] && SOURCE="$DIR/$SOURCE"
+done
+DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
+
+# Load main conf
 source hadoop_install.conf
+
 # Create user hadoop
 useradd -m hadoop -s /bin/bash
 passwd hadoop << EOF
@@ -8,6 +19,12 @@ ${hadoop_password}
 ${hadoop_password}
 EOF
 adduser hadoop sudo
+
+# Make tmp dir
+mkdir tmp
+chown -R hadoop ./tmp
+
+# Switch to hadoop
 su - hadoop << EOF
 cd ~
 EOF
@@ -28,6 +45,7 @@ mkdir ~/.ssh
 cd ~/.ssh/
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ./id_rsa.pub >> ./authorized_keys
+cp ./id_rsa.pub ${DIR}/tmp
 
 # Install hadoop
 cd ~
