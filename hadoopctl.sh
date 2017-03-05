@@ -5,16 +5,11 @@ usage()
 {
 	echo "Usage: `basename $0` <action>"
 	echo "Possible Actions:"
-	echo -e "\tinstall\tInstall Hadoop"
 	echo -e "\tinit\tInitialize hdfs"
 	echo -e "\treload\tStop and remake hdfs"
 	echo -e "\tstart\tStart Hadoop"
 	echo -e "\tstop\tStop Hadoop"
 	echo -e "\trestart\tRestart Hadoop"
-}
-install()
-{
-	sh ./setup.sh
 }
 init()
 {
@@ -48,10 +43,7 @@ restart()
 	start
 }
 
-if [[ $1 == "install" ]]
-then
-	install
-elif [[ $1 == "init" ]]
+if [[ $1 == "init" ]]
 then
 	init
 elif [[ $1 == "reload" ]]

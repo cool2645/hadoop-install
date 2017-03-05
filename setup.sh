@@ -88,3 +88,8 @@ do
 		./sshhelper.sh $slave_ip $root_password
     fi
 done
+
+# Setup hadoopctl
+cd $DIR
+cp ./hadoopctl.sh /usr/bin/hadoopctl
+chmod +x /usr/bin/hadoopctl
