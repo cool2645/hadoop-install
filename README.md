@@ -19,7 +19,7 @@ chmod +x setup.sh
 
 ## Hadoop Control
 
-After installed, as root
+After installed, as hadoop
 
 ```Shell
 hadoopctl init

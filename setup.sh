@@ -93,3 +93,7 @@ done
 cd $DIR
 cp ./hadoopctl.sh /usr/bin/hadoopctl
 chmod +x /usr/bin/hadoopctl
+
+# Complete
+
+echo "All clear! Enjoy!"

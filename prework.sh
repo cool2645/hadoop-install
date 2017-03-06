@@ -16,8 +16,8 @@ chown -R hadoop ./tmp
 
 # Install openjdk and expect
 apt-get update -y
-#apt-get dist-upgrade -y 
-#apt-get upgrade -y
+# apt-get dist-upgrade -y 
+# apt-get upgrade -y
 apt-get install sudo openjdk-7-jre openjdk-7-jdk expect -y
 str=$(dpkg -L openjdk-7-jdk | grep '/bin/javac')
 JH=${str%%/bin/javac}
