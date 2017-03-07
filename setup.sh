@@ -13,7 +13,7 @@ DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 cd $DIR
 source ./setup.conf
 
-# Create user hadoop && Switch to hadoop
+# Create user hadoop && Install java environment
 cd $DIR
 source ./prework.sh
 
@@ -26,7 +26,7 @@ cat ./id_rsa.pub >> ./authorized_keys
 cp ./id_rsa.pub ${DIR}/tmp
 chown -R hadoop /home/hadoop/.ssh
 
-# Generate host file and slaves
+# Generate host file and "slaves"
 cd $DIR
 slave_count=0
 for file in ./conf/*.conf

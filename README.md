@@ -1,6 +1,15 @@
-# Hadoop Setup Script
+# Hadoop Install Script
 
-This program helps set up Hadoop for Debian/Ubuntu OS.
+This program helps set up Hadoop cluster with Debian/Ubuntu OS.
+
+By using this script you do not need any additonal manual operation, what you need is just providing
+
++ Master's Hostname & ip & root password
++ Slaves' Hostname & ip & root password
+
+and the script will automatically help you set up the cluster.
+
+If you use this program to set up Hadoop, a useful tool *hadoopctl* will be installed, with which you can init/start/restart the cluster conveniently.
 
 ## Installation
 
