@@ -49,6 +49,7 @@ echo '0.0.0.0 Master' >> /etc/hosts
 source ./setup.conf
 echo "$master_ip $master_name" > ./tmp/slave.host
 echo "$master_ip Master" >> ./tmp/slave.host
+cat ./tmp/master.host >> ./tmp/slave.host
 if [[ $master_serve_as_slave == 1 ]]
 then
 	echo "$master_name" >> ./tmp/slaves
@@ -92,3 +93,7 @@ done
 cd $DIR
 cp ./hadoopctl.sh /usr/bin/hadoopctl
 chmod +x /usr/bin/hadoopctl
+
+# Complete
+
+echo "All clear! Enjoy!"
